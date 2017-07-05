@@ -1,0 +1,71 @@
+<ehcache>
+	
+	<!-- 
+		 <diskStore path="java.io.tmpdir"/> 指定了二级缓存中硬盘的存储路径
+		 maxElementsInMemory: 内存中的支持的最大对象的数量
+		 eternal: 配置生命周期,如果为true则永久生效(不会被销毁),在为true后面的两个参数是无效
+		 timeToIdleSeconds=60： 设置对象间隔的生命周期(如果在60秒内没有人访问则提前销毁)
+		 timeToLiveSeconds=120： 如果: eternal="false" 则设置对象的生命周期(单位是秒)
+		 overflowToDisk: 如果内存溢出是否支持硬盘存储 默认true
+		 memoryStoreEvictionPolicy: 二级缓存对象的替换策略 (在内存满的情况哪些对象将会踢出缓存)
+		  LRU  FIFO  LFU
+		  
+		 测试1：二级缓存的大小:  maxElementsInMemory 
+		
+		<defaultCache
+            maxElementsInMemory="2"
+            eternal="true"
+            timeToIdleSeconds="60"
+            timeToLiveSeconds="120"
+            overflowToDisk="false"
+            memoryStoreEvictionPolicy="LRU"
+            />
+        
+		  测试2： 对象的生命周期：  eternal="false"   timeToIdleSeconds="15"   timeToLiveSeconds="30"
+		  
+		 <defaultCache
+            maxElementsInMemory="100"
+            eternal="false"
+            timeToIdleSeconds="15"
+            timeToLiveSeconds="30"
+            overflowToDisk="false"
+            memoryStoreEvictionPolicy="LRU"
+          />
+          
+                           测试3： 测试二级缓存是否支持硬盘
+                           
+          <defaultCache
+            maxElementsInMemory="4"
+            eternal="true"
+            timeToIdleSeconds="1"
+            timeToLiveSeconds="2"
+            overflowToDisk="true"
+            memoryStoreEvictionPolicy="LRU"
+            />  
+                           测试4：缓存对象的替换策略  LRU  FIFO  LFU
+            
+            FIFO: 先进先出：此算法是按照顺序,没有考虑到访问的时间,和访问对象的频率
+			LRU:(默认,时间算法): 最近最未使用算法: 在选择退出对象的时候,离当前时间最近没有被访问的退出        
+			LFU：(频率算法)： 最近最少使用算法: 访问次数最少的被踢出                   
+			
+		 <defaultCache
+            maxElementsInMemory="4"
+            eternal="true"
+            timeToIdleSeconds="1"
+            timeToLiveSeconds="2"
+            overflowToDisk="false"
+            memoryStoreEvictionPolicy="LFU"
+            />               
+	 -->
+	
+    <diskStore path="java.io.tmpdir"/>
+
+     <defaultCache
+            maxElementsInMemory="10000"
+            eternal="false"
+            timeToIdleSeconds="60"
+            timeToLiveSeconds="120"
+            overflowToDisk="true"
+            memoryStoreEvictionPolicy="LFU"
+            />
+</ehcache>

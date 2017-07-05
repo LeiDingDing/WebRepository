@@ -1,0 +1,9 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+  </head>
+  <body>
+	 单击后退按钮,测试b.jsp缓存是否有效  	 
+  </body>
+</html>

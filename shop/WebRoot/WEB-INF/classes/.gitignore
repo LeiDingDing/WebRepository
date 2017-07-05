@@ -1,0 +1,12 @@
+/META-INF
+/Read Me.txt
+/applicationContext-public.xml
+/applicationContext-security.xml
+/cn
+/conn.properties
+/ehcache.xml
+/hibernate.cfg.xml
+/public.properties
+/remote.properties
+/shop.sql
+/struts.xml
