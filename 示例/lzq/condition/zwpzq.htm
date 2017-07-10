@@ -1,0 +1,105 @@
+﻿<!--<script src="../js/easyui/jquery.min.js" type="text/javascript"></script>
+<link href="../js/easyui/themes/default/easyui.min.css" rel="stylesheet" type="text/css" />
+<link href="../js/easyui/themes/icon.css" rel="stylesheet" type="text/css" />
+<script src="../js/easyui/jquery.easyui.min.js" type="text/javascript"></script>
+<script src="../js/easyui/locale/easyui-lang-zh_CN.js" type="text/javascript"></script>
+<script src="../condition/zqeasyui.js" type="text/javascript"></script>-->
+<script src="../condition/condition_c.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    $(function () {
+        chkcomboboxDelay("#s_bmm", "../condition/condition.ashx?action=query_zq_s_bmm&tbname=" + escape('植物品种权'), "text", "text");
+        chkcomboboxDelay("#s_shzz", "../condition/condition_c.ashx?action=query_s_shzz", "text", "text");
+        chkcomboboxDelay("#s_nd", "../condition/condition_c.ashx?action=query_zwpzq_nd", "text", "text");
+        
+    });
+    function select(saction) {
+        zqselect(saction, '植物品种权');
+    }
+</script>
+
+<form id="user_search" action="">
+<!--<a class="easyui-linkbutton" data-options="iconCls:'icon-search',onClick:function(){select('selectdata');}">查询</a>
+--><table>
+    <tr>
+        <td style="text-align: right; width: 70px;">
+            部门名
+        </td>
+        <td>
+            <input id="s_bmm" name="s_bmm" style="width: 164px" />
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: right">
+            属或者种
+        </td>
+        <td>
+            <input id="s_shzz" name="s_shzz" style="width: 164px" class="easyui-textbox" />
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: right">
+            品种名称
+        </td>
+        <td>
+            <input id="s_pzmc" name="s_pzmc" style="width: 164px" class="easyui-textbox" />
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: right">
+            品种权号
+        </td>
+        <td>
+            <input id="s_pzqh" name="s_pzqh" style="width: 164px" class="easyui-textbox" />
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: right">
+            发证时间
+        </td>
+        <td>
+            <input id="s_fzsj" name="s_fzsj" style="width: 164px" class="easyui-textbox" />
+        </td>
+    </tr>
+      <tr>
+        <td style="text-align: right">
+            培育人
+        </td>
+        <td>
+            <input id="s_pyr" name="s_pyr" style="width: 164px" class="easyui-textbox" />
+        </td>
+    </tr>
+      <tr>
+        <td style="text-align: right">
+            工资号
+        </td>
+        <td>
+            <input id="s_gzh" name="s_gzh" style="width: 164px" class="easyui-textbox" />
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: right">
+            完成团队
+        </td>
+        <td>
+            <input id="s_wctd" name="s_wctd" style="width: 164px" class="easyui-textbox" />
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: right">
+            奖励金额
+        </td>
+        <td>
+            <input id="s_jlje" name="s_jlje" style="width: 164px" class="easyui-textbox" />
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: right">
+            年度
+        </td>
+        <td>
+            <input id="s_nd" name="s_nd" style="width: 164px" class="easyui-textbox" />
+        </td>
+    </tr>
+</table>
+</form>

@@ -1,0 +1,198 @@
+﻿<!--<script src="../js/easyui/jquery.min.js" type="text/javascript"></script>
+<link href="../js/easyui/themes/default/easyui.min.css" rel="stylesheet" type="text/css" />
+<link href="../js/easyui/themes/icon.css" rel="stylesheet" type="text/css" />
+<script src="../js/easyui/jquery.easyui.min.js" type="text/javascript"></script>
+<script src="../js/easyui/locale/easyui-lang-zh_CN.js" type="text/javascript"></script>
+<script src="../condition/zqeasyui.js" type="text/javascript"></script>-->
+<script src="../condition/condition_c.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    $(function () {
+        chkcomboboxDelay("#s_bm", "../condition/condition.ashx?action=query_zq_s_bmm&tbname=" + escape('横向项目'), "text", "text");
+        chkcomboboxDelay("#s_qnx", "../condition/condition_c.ashx?action=query_hx_s_qnx", "text", "text");
+        chkcomboboxDelay("#s_znx", "../condition/condition_c.ashx?action=query_hx_s_znx", "text", "text");
+        chkcomboboxDelay("#s_nd", "../condition/condition_c.ashx?action=query_hx_s_nd", "text", "text");
+        chkcomboboxDelay("#s_xmly", "../condition/condition_c.ashx?action=query_hx_s_xmly", "text", "text");
+        chkcomboboxDelay("#s_xmjb", "../condition/condition_c.ashx?action=query_hx_s_xmjb", "text", "text");
+        chkcomboboxDelay("#s_xmlx", "../condition/condition_c.ashx?action=query_hx_s_xmlx", "text", "text");
+        chkcomboboxDelay("#s_xmxz", "../condition/condition_c.ashx?action=query_s_xmxz", "text", "text");
+        
+    });
+    function select(saction) {
+        zqselect(saction, '项目');
+    }
+</script>
+
+<form id="user_search" action="">
+<!--<a class="easyui-linkbutton" data-options="iconCls:'icon-search',onClick:function(){select('selectdata');}">查询</a>
+--><table>
+    <tr>
+        <td style="text-align: right">
+            部门名
+        </td>
+        <td>
+            <input id="s_bm" name="s_bm" style="width: 164px" class="easyui-textbox" />
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: right">
+            项目编号
+        </td>
+        <td>
+            <input id="s_xmbh" name="s_xmbh" style="width: 164px" class="easyui-textbox" />
+        </td>
+    </tr>    
+    <tr>
+        <td style="text-align: right">
+            负责人
+        </td>
+        <td>
+            <input id="s_fzr" name="s_fzr" style="width: 164px" class="easyui-textbox" />
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: right">
+            项目名称
+        </td>
+        <td>
+            <input id="s_xmmc" name="s_xmmc" style="width: 164px" class="easyui-textbox" />
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: right">
+            批准编号
+        </td>
+        <td>
+            <input id="s_pzbh" name="s_pzbh" style="width: 164px" class="easyui-textbox" />
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: right">
+            起年限
+        </td>
+        <td>
+            <input id="s_qnx" name="s_qnx" style="width: 164px" class="easyui-textbox" />
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: right">
+            止年限
+        </td>
+        <td>
+            <input id="s_znx" name="s_znx" style="width: 164px" class="easyui-textbox" />
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: right">
+            项目来源
+        </td>
+        <td>
+            <input id="s_xmly" name="s_xmly" style="width: 164px" class="easyui-textbox" />
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: right">
+            项目级别
+        </td>
+        <td>
+            <input id="s_xmjb" name="s_xmjb" style="width: 164px" class="easyui-textbox" />
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: right">
+            项目类型
+        </td>
+        <td>
+            <input id="s_xmlx" name="s_xmlx" style="width: 164px" class="easyui-textbox" />
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: right">
+            项目性质
+        </td>
+        <td>
+            <input id="s_xmxz" name="s_xmxz" style="width: 164px" class="easyui-textbox" />
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: right">
+            学科码
+        </td>
+        <td>
+            <input id="s_xkm" name="s_xkm" style="width: 164px" class="easyui-textbox" />
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: right">
+           学科名
+        </td>
+        <td>
+            <input id="s_xkmc" name="s_xkmc" style="width: 164px" class="easyui-textbox" />
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: right">
+            结题时间
+        </td>
+        <td>
+            <input id="s_jtsj" name="s_jtsj" style="width: 164px" class="easyui-textbox" />
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: right">
+            结题形式
+        </td>
+        <td>
+            <input id="s_jtxs" name="s_jtxs" style="width: 164px" class="easyui-textbox" />
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: right">
+            总经费
+        </td>
+        <td>
+            <input id="s_zjf" name="s_zjf" style="width: 164px" class="easyui-textbox" />
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: right">
+            到帐经费
+        </td>
+        <td>
+            <input id="s_dzjf" name="s_dzjf" style="width: 164px" class="easyui-textbox" />
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: right">
+            学校管理费
+        </td>
+        <td>
+            <input id="s_xxglf" name="s_xxglf" style="width: 164px" class="easyui-textbox" />
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: right">
+            学院管理费
+        </td>
+        <td>
+            <input id="s_xyglf" name="s_xyglf" style="width: 164px" class="easyui-textbox" />
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: right">
+            下拨经费
+        </td>
+        <td>
+            <input id="s_xbjf" name="s_xbjf" style="width: 164px" class="easyui-textbox" />
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: right">
+            年度
+        </td>
+        <td>
+            <input id="s_nd" name="s_nd" style="width: 164px" class="easyui-textbox" />
+        </td>
+    </tr>
+</table>
+</form>

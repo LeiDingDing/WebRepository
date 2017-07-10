@@ -1,0 +1,24 @@
+不能动的目录、是第三方的js库文件
+\js\easyui
+\js\fancybox
+\js\highcharts
+
+通用的C#代码，禁止修改
+\glibs\db\
+\glibs\code\
+
+\upload\lzq\***   上传目录，开发人员可以添加子目录
+
+开发人员目录,可以任意修改
+\姓名的拼音首字母
+\lzq\js
+\lzq\css
+\lzq\images
+\lzq\html
+
+\lzq\libs\db        数据库操作代码
+\lzq\libs\code      业务逻辑
+\lzq\ashx           ashx文件代码   
+
+后台C#代码都要加入namespace 开发人姓名的拼音首字母
+

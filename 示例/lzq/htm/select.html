@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script type="text/javascript" src="/js/easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/js/easyui/locale/easyui-lang-zh_CN.js"></script>
+     <link rel="stylesheet" type="text/css" href="/js/easyui/themes/default/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="/js/easyui/themes/icon.css" />
+    <script>
+        $(function () {
+            $('#add').click(function () {
+               /* $('#win').window({
+                    href:'index.html?action=add',
+                    width: 800,
+                    height: 600,
+                   
+                });*/
+                //$('#ifr').attr('src', 'index.html?action=add');
+                window.location.href = 'index.html?action=add';
+            });
+            $('#update').click(function () {
+
+                window.location.href = 'index.html?action=update&id=61';
+                
+            });
+            $('#scan').click(function () {
+
+                window.location.href = 'index.html?action=scan&id=61';
+
+            });
+        });
+    </script>
+</head>
+<body>
+    <a href="#" id="add">添加</a>
+    <a href="#" id="update">更新</a>
+    <a href="#" id="scan">查查看</a>
+</body>
+</html>

@@ -1,0 +1,205 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+
+
+    <script src="../../../js/easyui/jquery.min.js"></script>
+
+    <link href="../../../js/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" />
+
+    <link href="../../../js/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="../../../js/bootstrap/js/bootstrap.min.js"></script>
+
+    <link href="fileinput.css" rel="stylesheet" />
+    <script src="fileinput.js"></script>
+    <script src="zh.js"></script>
+    <script>
+        function getUrlParam(url, key) {
+            // 获取参数
+            // var url = window.location.search;
+            // 正则筛选地址栏
+            var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+            // 匹配目标参数
+            var result = url.substr(1).match(reg);
+            //返回参数值
+            return result ? decodeURIComponent(result[2]) : null;
+        }
+        function saveInfo() {
+            var id = $('#id').val();
+            var name = $('#name').val();
+            var password = $('#password').val();
+            var telephone = $('#telephone').val();
+            var email = $('#email').val();
+            var address = $('#address').val();
+            var img = $('#img').val();
+            var video = $('#video').val();
+            var row = [];
+            row.push({
+                学号: id,
+                姓名: name,
+                密码: password,
+                电话: telephone,
+                邮箱: email,
+                住址: address,
+                图片: img,
+                视频:video
+            });
+            $.post('../../ashx/Award.ashx?action=saveSelf', { row: row }, function (result) {
+                if(result=='1'){
+                    location.reload();
+                }
+            });
+        }
+        $(function () {
+            var url = parent.window.location.search;
+            var userid = getUrlParam(url, 'userid');
+            $.post('../../ashx/Award.ashx?action=query', { id: userid }, function (result) {
+                var obj = JSON.parse(result);
+                var row = obj[0];
+                $('#id').val(row.id);
+                $('#name').val(row.姓名);
+                $('#password').val(row.密码);
+                $('#telephone').val(row.电话);
+                $('#email').val(row.邮箱);
+                $('#address').val(row.住址);
+                $('#img').val(row.picture);
+                $('#video').val(row.video);
+                if (row.picture!='') {
+                    var picsrc = '../../Upload/Image/base/' + row.picture;
+                    $('#personimg').attr('src', picsrc);
+                }
+                if (row.video!='') {
+                    var videosrc = '../../Upload/videos/' + row.video;
+
+                    $('#personvideo').attr('src', videosrc);
+                }
+                
+            });
+        });
+    </script>
+    
+</head>
+<body>
+    <form class="form-inline definewidth m20" action="index.html" method="get">
+        <div style="padding:5px;">
+           <!-- <button type="submit" class="btn btn-primary">查询</button>-->&nbsp;&nbsp; 
+            <button type="button" onclick="saveInfo()" class="btn btn-success" id="addnew">保存</button>
+        </div>
+        
+    </form>
+    <form id="personff" class="form-horizontal" role="form" enctype="multipart/form-data">
+        <fieldset>
+            <legend>基本资料</legend>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="id">学号</label>
+                <div class="col-sm-2">
+                    <input class="form-control" id="id" name="id" type="text" placeholder="id" />
+                </div>
+                <label class="col-sm-2 control-label" for="name">姓名</label>
+                <div class="col-sm-2">
+                    <input class="form-control" id="name" name="name" type="text" placeholder="请输入姓名" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="password">密码</label>
+                <div class="col-sm-2">
+                    <input class="form-control" id="password" name="password" type="text" placeholder="请输入密码" />
+                </div>
+                <label class="col-sm-2 control-label" for="telephone">电话</label>
+                <div class="col-sm-2">
+                    <input class="form-control" id="telephone" name="telephone" type="text" placeholder="请输入电话号码" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="email">邮箱</label>
+                <div class="col-sm-2">
+                    <input class="form-control" id="email" name="email" type="email" placeholder="example@163.com" />
+                </div>
+                <label class="col-sm-2 control-label" for="address">住址</label>
+                <div class="col-sm-2">
+                    <input class="form-control" id="address" name="address" type="text" placeholder="请输入住址" />
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>照片</legend>
+            <div class="form-group">
+                <div class="col-sm-1">
+                    
+                </div>
+                <div class="col-sm-4">
+                    <input type="hidden" id="img"/>
+                    <input id="personimg" class="img-thumbnail" style="width:50%;height:50%;" type="image" />
+                </div>
+                <div class="col-sm-4">
+                    <input id="file-1" class="file" type="file"
+                           data-min-file-count="0"> <br>
+                </div>
+            </div>
+
+
+        </fieldset>
+        <fieldset>
+            <legend>动态视频</legend>
+            <div class="form-group">
+                <div class="col-sm-1">
+
+                </div>
+                <div class="col-sm-4">
+                    <video id="personvideo" style="width:100%;height:100%;" controls>
+                        <input type="hidden" id="video" />
+                        <source type="video/mp4">
+                        您的浏览器不支持 HTML5 video 标签。
+                    </video>
+                </div>
+                <div class="col-sm-4">
+                    <input id="file-2" class="file" type="file"
+                           data-min-file-count="0"> <br>
+                </div>
+            </div>
+
+
+        </fieldset>
+
+
+    </form>
+</body>
+</html>
+<script>  
+    var url = parent.window.location.search;
+    var userid = getUrlParam(url, 'userid');
+    $("#file-1").fileinput({
+        language: 'zh',
+        uploadUrl: '../../ashx/Award.ashx?action=upload&id=' + userid, // you must set a valid URL here else you will get an error  
+        allowedFileExtensions: ['jpg', 'png', 'gif'],
+        maxFileCount: 1,   //同时最多上传1个文件  
+        
+    });
+    //这是提交完成后的回调函数    
+    $("#file-1").on("fileuploaded", function (event, data, previewId, index) {
+        if (data.response) {
+            var filename = data.response.filename;
+            $('#img').val(filename);
+            
+            
+        }
+        
+    });
+    $("#file-2").fileinput({
+        language: 'zh',
+        uploadUrl: '../../ashx/Award.ashx?action=upload&id=' + userid, // you must set a valid URL here else you will get an error  
+        allowedFileExtensions: ['mp4', 'avi', 'rmvb'],
+        maxFileCount: 1,   //同时最多上传1个文件  
+    });
+    $("#file-2").on("fileuploaded", function (event, data, previewId, index) {
+        if (data.response) {
+            var filename = data.response.filename;
+            $('#video').val(filename);
+            
+           // alert(JSON.stringify(data));
+        }
+
+    });
+</script>  

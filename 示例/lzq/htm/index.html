@@ -1,0 +1,96 @@
+﻿
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>后台管理系统</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="assets/css/dpl-min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/bui-min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/main-min.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" src="../../js/easyui/jquery.min.js"></script>
+    
+    <script>
+        
+        $(function () {
+
+            function getUrlParam(url, key) {
+                // 获取参数
+                // var url = window.location.search;
+                // 正则筛选地址栏
+                var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+                // 匹配目标参数
+                var result = url.substr(1).match(reg);
+                //返回参数值
+                return result ? decodeURIComponent(result[2]) : null;
+            }
+            var url = window.location.search;
+            var username = getUrlParam(url, "username");
+            var roleid = getUrlParam(url, "roleid");
+            $('#dl-user').text(username);
+            var role = '';
+            if(roleid=='1'){
+                role = '管理员';
+            } else if (roleid == '2') {
+                role = '管理教师';
+            } else if (roleid == '3') {
+                role = '班主任';
+            } else if (roleid == '4') {
+                role = '学生';
+            }
+            $('#dl-role').text(role);
+            
+            if(roleid=='1'||roleid=='2'||roleid=='3'){
+                $('#menu').css('display','none');
+            }
+
+            
+
+        });
+        
+    </script>
+</head>
+<body>
+
+<div class="header">
+
+    <div class="dl-title" >
+        <img src="assets/img/top.png">
+    </div>
+
+    <div class="dl-log">欢迎您，<span class="dl-log-user" id="dl-user"></span>&nbsp;所属角色:<span id="dl-role"></span><a href="login/login.html" title="退出系统" class="dl-log-quit">[退出]</a>
+    </div>
+</div>
+<div class="content">
+    <div class="dl-main-nav">
+        <div class="dl-inform"><div class="dl-inform-title"><s class="dl-inform-icon dl-up"></s></div></div>
+        <ul id="J_Nav"  class="nav-list ks-clear">
+            <li class="nav-item dl-selected"><div class="nav-item-inner nav-home">系统管理</div></li>
+		    <!--<li id="menu2" class="nav-item dl-selected"><div class="nav-item-inner nav-order">业务管理</div></li>-->
+            <li class="nav-item dl-selected"><div id="menu" class="nav-item-inner nav-order">基础信息</div></li>
+        </ul>
+    </div>
+    <ul id="J_NavContent" class="dl-tab-conten">
+
+    </ul>
+</div>
+
+<script type="text/javascript" src="assets/js/jquery-1.8.1.min.js"></script>
+<script type="text/javascript" src="assets/js/bui-min.js"></script>
+<script type="text/javascript" src="assets/js/common/main-min.js"></script>
+<script type="text/javascript" src="assets/js/config-min.js"></script>
+    
+<script>
+   
+    BUI.use('common/main', function () {
+        
+        //var config = [{ id: '1', menu: [{ text: '系统管理', items: [{ id: '12', text: '基本信息管理', href: 'bjdatagrid.html' }, { id: '3', text: '获奖信息管理', href: 'awarddatagrid.html' }, { id: '4', text: '成绩信息管理', href: 'gradedatagrid.html' }] }] }, { id: '7', homePage: '9', menu: [{ text: '业务管理', items: [{ id: '9', text: '查询业务', href: 'Node/index.html' }] }] }, { id: '17', homePage: '19', menu: [{ text: '基础信息', items: [{ id: '19', text: '个人资料', href: 'person/person.html' }] }] }];
+        var config = [{ id: '1', menu: [{ text: '系统管理', items: [{ id: '12', text: '基本信息管理', href: 'bjdatagrid.html' }, { id: '3', text: '获奖信息管理', href: 'awarddatagrid.html' }, { id: '4', text: '成绩信息管理', href: 'gradedatagrid.html' }] }] },{ id: '17', homePage: '19', menu: [{ text: '基础信息', items: [{ id: '19', text: '个人资料', href: 'person/person.html' }] }] }];
+        new PageUtil.MainPage({
+        modulesConfig : config
+    });
+    });
+</script>
+    
+</body>
+</html>

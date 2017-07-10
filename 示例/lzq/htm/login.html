@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script type="text/javascript" src="../../js/easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../../js/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../js/easyui/themes/default/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="../../js/easyui/themes/icon.css" />
+    <style type="text/css">
+        #dd div {
+            padding: 5px;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            /* $("[name=login]").validatebox({
+                 required: true,
+                 missingMessage: '登陆名必填'
+             });
+             $("[name=pass]").validatebox({
+                 required: true,
+                 missingMessage: '密码必填'
+             });
+             // 关闭验证
+             $("#ff").form("disableValidation");*/
+            $('#dd').dialog({
+                title: '系统后台入口',
+                width: 270,
+                height: 200,
+                modal: true,
+                buttons: [{
+                    text: '登陆',
+                    handler: function () {
+                        // $("#ff").form("enableValidation");
+                        var sf = $('input[name="shengfen"]:checked').val();
+                        var user = $('#login').textbox('getText');
+                        var pass = $('#pass').textbox('getText');
+                        if (user != null && pass != null) {
+                            // 提交登陆请求,如果需要http提交请求,则调用 dom: submit方法
+                            $.post("../ashx/Award.ashx?action=login", { username: user, password: pass, role: sf }, function (result) {
+                                if (result.indexOf('登录成功') > -1) {
+                                    var arr = result.split(',');
+                                    window.location.href = 'index.html?userid='+user+'&username='+arr[2]+'&roleid='+arr[1];
+                                } else {
+                                    $.messager.alert('提示',result);
+                                }
+
+                                //
+                            });
+                        }
+                    }
+                }, {
+                    text: '取消',
+                    handler: function () {
+                        alert("取消");
+                    }
+                }]
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="dd">
+        <form id="ff">
+            <div>
+                <label for="login">账号:</label>
+                <input class="easyui-textbox" data-options="required:true,prompt: '用户名不能为空'," id="login" />
+            </div>
+            <div>
+                <label for="pass">密码:</label>
+                <input class="easyui-textbox" data-options="type:'password',required:true,prompt: '密码必填'," id="pass" />
+            </div>
+            <div>
+                <input type="radio" name="shengfen" value="1" checked />学生
+                <input type="radio" name="shengfen" value="2" />教师
+                
+            </div>
+            <div>
+                <!-- 支持 request session application -->
+                <!-- 去访问 request.getAttribute("error") 但是我们的错误消息是在  struts的requestMap中
+                     struts 已经吧 request内置对象给封装  StrutsRequestWrapper (装饰模式)
+                -->
+            </div>
+        </form>
+    </div>
+</body>
+</html>

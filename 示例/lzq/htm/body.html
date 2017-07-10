@@ -1,0 +1,202 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script type="text/javascript" src="../../js/easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../../js/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../js/easyui/themes/default/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="../../js/easyui/themes/icon.css" />
+
+    <script src="../condition/zqeasyui.js"></script>
+    <style type="text/css">
+        #menu ul {
+            list-style-type: none;
+            padding: 0px;
+            margin: 0px;
+        }
+
+            #menu ul li {
+                border-bottom: 1px solid #008792;
+            }
+
+                #menu ul li a {
+                    /* 先把a标签转化为块级标签  */
+                    display: block;
+                    padding: 5px;
+                    text-decoration: none;
+                    /*border-left: 12px solid #008792;*/
+                }
+
+                    #menu ul li a:hover {
+                        background-color: #008792;
+                        color: #fff;
+                    }
+    </style>
+    <script type="text/javascript">
+        function panelsettitle() {
+            zqpanelsettitle("#zqlayout", "     点击此处自动显示查询面板");
+        }
+
+        function openPanel() {
+            if (!$('div#zqcondition.panel-body').length)  //判断是否easyui初始化
+            {
+                $('#zqcondition').panel({
+                    href: '../condition/reward.htm'
+                });
+            }
+        }
+    </script>
+    
+    <script type="text/javascript">
+        $(function () {  // js文件内部是不能使用 jstl变量的 ${shop}
+            // 1: 注册 a标签单击事件  [] 是属性选择器
+            $("a[title]").click(function () {
+                // 2: 获取当前a标签的属性值
+                var text = $(this).text();
+                var href = $(this).attr("title");
+                if ($("#tt").tabs('exists', text)) {
+                    // 当前选项卡已经存在,切换即可
+                    $("#tt").tabs('select', text);
+                } else {
+                    // 创建新的选项卡
+                    $("#tt").tabs('add', {
+                        title: text,
+                        content: "<iframe title=" + text + " src= " + href + " width='100%' height='100%' frameborder='0' />",
+                        closable: true
+                    });
+
+                }
+            });
+            
+            function getUrlParam(url,key) {
+                // 获取参数
+               // var url = window.location.search;
+                // 正则筛选地址栏
+                var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+                // 匹配目标参数
+                var result = url.substr(1).match(reg);
+                //返回参数值
+                return result ? decodeURIComponent(result[2]) : null;
+            }
+            var url = window.location.search;
+            var roleclass = getUrlParam(url,"roleclass");
+            var username = getUrlParam(url, "username");
+            var bmmc = getUrlParam(url, "bmmc");
+            $('#username').val(username);
+            $('#bmmc').val(bmmc);
+            $('#user_info').text(bmmc + ' ' + username + ' 选择角色:');
+
+            $('#exit').click(function () {
+                $.messager.confirm('系统提示', '您确定要退出本次登录吗?', function (r) {
+                    if (r) {
+                        window.location.href = 'login.html';
+                    }
+                });
+            });
+            if (roleclass !== null) {
+                var role = parseInt(roleclass);
+                var roles = [];
+                for (var i = role; i >= 1; i--) {
+                    switch (i) {
+                        case 1: roles.push({ value: 1, content: '个人' }); break;
+                        case 2: roles.push({ value: 2, content: '学院' }); break;
+                        case 3: roles.push({ value: 3, content: '学校' }); break;
+                    }
+                }
+                $('#roleclass').combobox({
+                    editable: false,
+                    valueField: 'value',
+                    textField: 'content',
+                    data: roles,
+                    onLoadSuccess: function () { //加载完成后,设置选中第一项
+                        var val = $(this).combobox('getData');
+                        for (var item in val[0]) {
+                            if (item == 'value') {
+                                $(this).combobox('select', val[0][item]);
+                            }
+                        }
+                    },
+                    onChange: function (newValue, oldValue) {
+                        if ($("#tt").tabs('exists', '获奖管理')) {
+                            var pp = $('#tt').tabs('getSelected');
+                            var tab = pp.panel('options').tab;
+                            var title = pp.panel('options').title;
+                            var content = pp.panel('options').content;
+                            $('#tt').tabs('close', title);
+                            $('#tt').tabs('add', {
+                                title: title,
+                                content: content,
+                                closable: true
+                            });
+                        }
+                    }
+                });
+
+            } else {
+                $('#roleclass').combobox();
+            }
+
+        });
+    </script>
+</head>
+<body id="zqlayout" class="easyui-layout">
+    <input type="hidden" id="username" />
+    <input type="hidden" id="bmmc" />
+    <div region="north" split="false" border="false" style="overflow: hidden; height: 56px;
+            background:#7f99be repeat-x center 50%;
+            line-height: 20px; color: #fff; font-family: Verdana, 微软雅黑,黑体">
+        <div style="height:25px">
+            <span style=" margin-right:70px; float: right; " class="head">
+                <span id="labelwelcome"></span> &nbsp;&nbsp;<span id="user_info"></span>
+                <input id="roleclass" style="width: 60px" panelheight="80" />&nbsp;
+                <a id="exit" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-back'">退出系统</a>
+            </span><span style="padding-left: 10px; font-size: 16px;">
+                扬州大学科研管理系统
+            </span>
+        </div>
+    </div>
+    <div data-options="region:'west',title:'菜单栏',split:true" style="width:180px;">
+        <div id="menu" class="easyui-accordion" data-options="fit:true">
+            <div title="基本菜单">
+                <ul>
+                    <li><a title="bjdatagrid.html" href="#">获奖管理</a></li>
+                    <li><a title="#" href="#">专利管理</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+    <div data-options="region:'center',title:'内容部分'" style="padding:1px;background:#eee;">
+        <div id="tt" class="easyui-tabs" data-options="fit:true">
+            <div title="首页" style="padding:10px;">
+                系统信息
+            </div>
+        </div>
+    </div>
+    <div id="pwhere" data-options="region:'east',title:'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击右侧按钮自动隐藏查询面板',split:true,collapsed:true,onBeforeExpand:function(){openPanel();},onBeforeCollapse:function(){panelsettitle();}"
+         style="width: 290px; border: 0;">
+        <div class="easyui-layout" style="height: 100%; display: block;">
+            <div data-options="region:'north'" style="width: 220px; height: 40px; padding: 6px;">
+                <a class="easyui-linkbutton" data-options="iconCls:'icon-search',onClick:function(){select('selectdata');}">
+                    查询
+                </a> <a class="easyui-linkbutton" data-options="iconCls:'icon-reload',onClick:function(){select('selectagaindata');}">
+                    结果中查
+                </a> <a class="easyui-linkbutton" data-options="iconCls:'icon-clear',onClick:function(){ClearText();}">
+                    清空
+                </a> <a class="easyui-linkbutton" data-options="iconCls:'icon-tip',onClick:function(){select('selectalldata');}">
+                    全部
+                </a>
+                <!--<a class="easyui-linkbutton" data-options="iconCls:'icon-tip',onClick:function(){hide_sear();}">隐藏</a>-->
+            </div>
+            <div data-options="region:'center'" style="border: 0">
+                <div id="zqcondition" style="width: 260px; padding: 5px; background: #fafafa;" />
+            </div>
+        </div>
+    </div>
+    <div id="win" style="overflow:hidden;" data-options="collapsible:false,minimizable:false,maximizable:false,modal:true"></div>
+
+</body>
+</html>  

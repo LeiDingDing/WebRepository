@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script type="text/javascript" src="../../../js/easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="../../../js/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../../../js/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../js/easyui/themes/default/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="../../../js/easyui/themes/icon.css" />
+    <script src="updateaward.js"></script>
+    <style>
+        table {
+            border-right: 1px solid #d9d6c3;
+            border-bottom: 1px solid #d9d6c3;
+            background: #f6f5ec;
+            font-size: 14px;
+        }
+
+            table td {
+                border-left: 1px solid #d9d6c3;
+                border-top: 1px solid #d9d6c3;
+                padding: 5px;
+            }
+        .right{
+                    text-align:right;
+                    padding-right:20px;
+                }
+    </style>
+    
+    <script>
+        function getUrlParam(url, key) {
+            // 获取参数
+            // var url = window.location.search;
+            // 正则筛选地址栏
+            var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+            // 匹配目标参数
+            var result = url.substr(1).match(reg);
+            //返回参数值
+            return result ? decodeURIComponent(result[2]) : null;
+        }
+        
+        
+    </script>
+
+</head>
+<body>
+    <form id="ff">
+        <table border="0" cellspacing="0" cellpadding="1" style="width: 100%;">
+            
+            <tr>
+                <td class="right" style="width: 30%;"><label for="awardno">获奖编号:</label></td>
+                <td style="width: 70%;"><input id="awardno" name="awardno" /></td>
+            </tr>
+            <tr>
+                <td class="right"><label for="award">获奖名称:</label></td>
+                <td><input id="award" name="award" /></td>
+            </tr>
+            <tr>
+                <td class="right"><label for="ayear">获奖时间:</label></td>
+                <td><input id="ayear" name="ayear" /></td>
+            </tr>
+            <tr>
+                <td class="right"><label for="awardrank">奖项级别:</label></td>
+                <td><select id="awardrank" name="awardrank" class="easyui-combobox" data-options="editable:false,panelHeight:'auto'">
+                    <option value="1" selected=selected>国家级</option>
+                    <option value="2">部级</option>
+                    <option value="3">省级</option>
+                    <option value="4">厅级</option>
+                    <option value="5">市级</option>
+                    <option value="6">其它</option>
+                </select></td>
+            </tr>
+            <tr>
+                <td class="right"><label for="sid">学生:</label></td>
+                <td ><input id="sid" name="sid" /></td>
+            </tr>
+            <tr id="save">
+                <td class="right"><label>操作:</label></td>
+                <td>
+                    <a href="#" onclick="obj.save()" class="easyui-linkbutton" data-options="iconCls: 'icon-edit'">保存</a>
+                    
+                </td>
+            </tr>
+        </table>
+        
+        
+        
+    </form>
+</body>
+</html>

@@ -1,0 +1,97 @@
+﻿/*屏幕居中*/
+    <!--
+        html,body{width:100%;height:100%;padding:0;margin:0;overflow:auto;}
+        .wrap{
+            height:95%;
+            text-align:center;
+        }
+        .container {
+            width:530;
+            border:0px solid #ccc;
+            text-align:left;
+            display:inline-block;
+            vertical-align:middle;
+        }
+        .edge {
+            width:1px;
+            *width:0;
+            height:100%;
+            display:inline-block;
+            vertical-align:middle;
+        }
+    -->
+    
+body {
+	font-family: "Verdana", "宋体", Arial;
+	font-size: 12px;
+	color: #333333;
+	text-decoration: none;
+	background-repeat: no-repeat;
+	background-position: 856px top;
+	line-height: 130%;
+	padding: 0px;
+	text-align: -moz-center;          /*firefox*/
+	text-align: -khtml-center;        /*chrome,safari*/
+	#text-align: center;              /*ie*/
+	margin-left:auto;                 /*所有*/
+	margin-right:auto;                /*所有*/
+}
+
+		.style6
+		{
+			height: 25px;
+			width: 305px;
+		}
+		.style11
+		{
+			width: 305px;
+			text-align:left;
+			vertical-align:top;
+		}
+		.style12
+		{
+			height: 25px;
+			width: 180px;
+		}
+		.style13
+		{
+			width: 180px;
+			height: 118px;
+		}
+		.style14
+		{
+			width: 131px;
+			text-align:right;
+			height:30;
+		}
+		.style15
+		{
+			width:73px;
+			text-align:center;
+		}
+		body
+		{
+			background-image:url('../../Images/bg.jpg');
+			background-repeat: no-repeat;
+			background-position: center; 
+			background-attachment: fixed;
+		}
+		
+		.yd
+		{
+			text-align: center; 
+			height: 208px; 
+			width: 518px; 
+			background-image: url('../../images/02.gif');
+		}
+		.table1
+		{
+			width:100%;
+			border:0;
+		}
+		.table2
+		{
+			border:0;
+			width: 304px; 
+			height: 92px;
+		}

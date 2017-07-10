@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script type="text/javascript" src="../../../js/easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="../../../js/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../../../js/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../js/easyui/themes/default/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="../../../js/easyui/themes/icon.css" />
+    <style>
+        table {
+            border-right: 1px solid #d9d6c3;
+            border-bottom: 1px solid #d9d6c3;
+            background: #f6f5ec;
+            font-size: 14px;
+        }
+
+            table td {
+                border-left: 1px solid #d9d6c3;
+                border-top: 1px solid #d9d6c3;
+                padding: 5px;
+            }
+        .right{
+                    text-align:right;
+                    padding-right:20px;
+                }
+    </style>
+    <script type="text/javascript" src="searchgrade.js"></script>
+    
+
+</head>
+<body>
+    <form id="ff">
+        <table border="0" cellspacing="0" cellpadding="1" style="width: 100%;">
+
+            <tr>
+                <td class="right" style="width: 30%;"><label for="gradeno">成绩编号:</label></td>
+                <td style="width: 70%;"><input id="gradeno" name="gradeno" /></td>
+            </tr>
+            <tr>
+                <td class="right"><label for="chinese">语文:</label></td>
+                <td><input id="chinese" name="chinese" /></td>
+            </tr>
+            <tr>
+                <td class="right"><label for="math">数学:</label></td>
+                <td><input id="math" name="math" /></td>
+            </tr>
+            <tr>
+                <td class="right"><label for="english">英语:</label></td>
+                <td><input id="english" name="english" /></td>
+            </tr>
+            <tr>
+                <td class="right"><label for="computer">计算机:</label></td>
+                <td><input id="computer" name="computer" /></td>
+            </tr>
+            <tr>
+                <td class="right"><label for="sid">学生:</label></td>
+                <td><input id="sid" name="sid" /></td>
+            </tr>
+            <tr id="search">
+                <td class="right"><label>操作:</label></td>
+                <td>
+                    <a href="#" onclick="obj.search()" class="easyui-linkbutton" data-options="iconCls: 'icon-search'">查询</a>
+
+                </td>
+            </tr>
+        </table>
+
+
+
+    </form>
+</body>
+</html>

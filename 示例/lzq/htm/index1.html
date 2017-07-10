@@ -1,0 +1,322 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script type="text/javascript" src="../../js/easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../../js/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="../js/index.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../js/easyui/themes/default/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="../../js/easyui/themes/icon.css" />
+    <script src="../js/jquery.jqzoom.js" type="text/javascript"></script>
+    <link href="../css/jqzoom.css" rel="stylesheet" type="text/css" />
+    <style>
+        
+        table {
+            border-right: 1px solid #d9d6c3;
+            border-bottom: 1px solid #d9d6c3;
+            background: #f6f5ec;
+            font-size: 14px;
+        }
+
+            table td {
+                border-left: 1px solid #d9d6c3;
+                border-top: 1px solid #d9d6c3;
+                padding: 5px;
+            }
+                .right{
+                    text-align:right;
+                }
+
+        .header {
+            background: #d3d7d4;
+        }
+
+        #peopletb, #depttb {
+            text-align: center;
+        }
+        .star {
+            color:#ff0000;
+        }
+        #savediv,#checkdiv{
+            padding:3px;
+        }
+        
+  </style>
+    
+
+</head>
+
+
+
+<body style="overflow:hidden;margin: 1px;">
+    <script>
+        //根据参数执行相应的js函数
+        String.prototype.getQueryString = function (name) {
+            var reg = new RegExp("(^|&|\\?)" + name + "=([^&]*)(&|$)"), r;
+            if (r = this.match(reg)) return unescape(r[2]); return null;
+        };
+        var action = location.search.getQueryString("action");
+        if (action == 'update') {
+            var id = location.search.getQueryString("id");
+            window.onload = function () {
+                $('#ids').val(id);
+                obj.update(id);
+            }
+        } else if (action == 'add') {
+            window.onload = function () {
+                obj.add();
+            }
+        } else if (action == 'scan') {
+            var id = location.search.getQueryString("id");
+            window.onload = function () {
+                $('#ids').val(id);
+                obj.scan(id);
+            }
+            
+        }
+    </script>
+        <div id="checkdiv">
+            <a href="#" onclick="obj.check()" class="easyui-linkbutton" data-options="iconCls:'icon-ok'">审核通过</a>
+            <a href="#" onclick="obj.close()" class="easyui-linkbutton" data-options="iconCls:'icon-no'">关闭</a>
+        </div>
+        <div id="savediv">
+            <a href="#" onclick="obj.confirm()" class="easyui-linkbutton" data-options="iconCls:'icon-save'">保存</a>
+            <a href="#" onclick="obj.reset()" class="easyui-linkbutton" data-options="iconCls:'icon-reload'">全部清空</a>
+            <a href="#" onclick="obj.close()" class="easyui-linkbutton" data-options="iconCls:'icon-no'">关闭</a>
+            &nbsp;&nbsp;注：<span class="star">*</span>必填,&nbsp;&nbsp;*标记处填写获奖信息时必填
+        </div>
+        <div style="width:99.5%;height:90%;overflow-y:scroll;position:absolute;margin-top:5px;">
+            <form id="ff" action="../ashx/Award.ashx?action=upload" method="post" enctype="multipart/form-data">
+                <input type="hidden" id="ids" name="ids" />
+                <input type="hidden" id="files" name="files" />
+                
+                <input type="hidden" id="action" name="action" value="load"/>
+               
+                <table border="0" cellspacing="0" cellpadding="1" style="width: 100%;">
+                    <tr>
+                        <td class="right" style="width: 14%;"><label for="name">申报人:</label></td>
+                        <td style="width: 20%;"><input id="name" name="name" type="text" /><span class="star">&nbsp;&nbsp;*</span></td>
+                        <td class="right" style="width: 13%;"><label>申报单位:</label></td>
+                        <td style="width: 20%;"><input id="declareunit" name="declareunit" /><span class="star">&nbsp;&nbsp;*</span></td>
+                        <td class="right" style="width: 13%;"><label>申报人工资号:</label></td>
+                        <td style="width: 20%;"><input id="declaregongzi" name="declaregongzi" class="easyui-textbox" data-options="editable:false,required:true,prompt: '工资号不能为空'," /><span class="star">&nbsp;&nbsp;*</span></td>
+                    </tr>
+
+                    <tr>
+                        <td class ="right"><label>申报年度:</label></tdclass>
+                        <td><input id="dyear" name="dyear" /><span class="star">&nbsp;&nbsp;*</span></td>
+                        <td class="right"><label>颁奖单位:</label></td>
+                        <td colspan="3"><input type="text" id="awardunit" name="awardunit" /><span class="star">&nbsp;&nbsp;*</span></td>
+                    </tr>
+                    <tr>
+                        <td class="right"><label>等级:</label></td>
+                        <td>
+                            <select id="declaregrade" name="declaregrade" class="easyui-combobox" data-options="editable:false,panelHeight:200">
+                                <option value="1" selected=selected>1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                            <span class="star">&nbsp;&nbsp;*</span>
+                        </td>
+                        <td class="right"><label>奖种名称:</label></td>
+                        <td colspan="3"><input type="text" id="awardname" name="awardname" /><span class="star">&nbsp;&nbsp;*</span></td>
+                    </tr>
+                    <tr>
+                        <td class="right"><label>奖种级别:</label></td>
+                        <td>
+                            <select id="awardrank" name="awardrank" class="easyui-combobox" data-options="editable:false,panelHeight:'auto'">
+                                <option value="1" selected=selected>国家级</option>
+                                <option value="2">部级</option>
+                                <option value="3">省级</option>
+                                <option value="4">厅级</option>
+                                <option value="5">市级</option>
+                                <option value="6">其它</option>
+                            </select>
+                            <span class="star">&nbsp;&nbsp;*</span>
+                        </td>
+                        <td class="right"><label>成果名称:</label></td>
+                        <td colspan="3"><input id="achievement" name="achievement" type="text" style="width: 50%;" /><span class="star">&nbsp;&nbsp;*</span></td>
+
+                    </tr>
+                    <tr>
+
+                        <td class="right">领奖人:</td>
+                        <td><input type="text" id="getname" name="getname" /><span>&nbsp;&nbsp;*</span></td>
+                        <td class="right">领奖人工资号:</td>
+                        <td><input id="getnamegz" name="getnamegz" /><span>&nbsp;&nbsp;*</span></td>
+                        <td class="right">领奖人所在单位:</td>
+                        <td><input id="getunit" name="getunit" class="easyui-textbox" data-options="editable:false" /><span>&nbsp;&nbsp;*</span></td>
+                    </tr>
+                    <tr>
+                        <td class="right">获奖年度:</td>
+                        <td><input id="ayear" name="ayear" /><span>&nbsp;&nbsp;*</span></td>
+                        <td class="right">奖励金额(万元):</td>
+                        <td colspan="3"><input type="text" id="reward" name="reward" /></td>
+                    </tr>
+                    <tr>
+                        <td class="right">
+
+                            <label>完成人:</label>
+                            <select id="peonum">
+                                <option value="" selected=selected disabled='disabled'>人数</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                            </select>
+
+
+
+                        </td>
+                        <td id="pe" colspan="5">
+
+                            <table border="0" cellspacing="0" cellpadding="1" id="peopletb" style="width:100%">
+                                <tr class="header">
+                                    <td style="width: 15%;">完成人列表</td>
+                                    <td style="width: 15%;">姓名</td>
+                                    <td style="width: 15%;">所在单位(可编辑)</td>
+                                    <td style="width: 15%;">工资号</td>
+                                    <td style="width: 15%;">部门码</td>
+                                    <td style="width: 15%;">部门名</td>
+
+                                </tr>
+
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                       
+                        <td class="right">
+                            <label>主要完成单位:</label>
+                            <select id="deptnum">
+                                <option value="" selected=selected disabled='disabled'>数量</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                        </td>
+
+                        <td id="de" colspan="5">
+
+                            <table border="0" cellspacing="0" cellpadding="1" id="depttb" style="width:80%">
+                                <tr class="header">
+                                    <td style="width: 30%;">完成单位列表</td>
+                                    <td style="width: 60%;">单位名称</td>
+
+                                </tr>
+
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">
+                            <label>单位排序:</label>
+                        </td>
+                        <td colspan="5">
+                            <select id="unitorder" class="easyui-combobox" data-options="editable:false,panelHeight:200,disabled:true">
+                                <option value="0" selected=selected disabled></option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right"><label>学科分类:</label></td>
+                        <td colspan="5">
+                            <input id="xk1" name="xk1" /><span class="star">&nbsp;&nbsp;*</span>
+                            &nbsp;&nbsp;<input id="xk2" name="xk2" /><span class="star">&nbsp;&nbsp;*</span>
+                            &nbsp;&nbsp;<input id="xk3" name="xk3" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">研究成果类型:</td>
+                        <td colspan="5">
+                           <!-- <input type="radio" name="achievetype" value="基础研究" checked=checked checked=checked checked=checked checked=checked />基础研究
+                            <input type="radio" name="achievetype" value="应用基础研究" />应用基础研究
+                            <input type="radio" name="achievetype" value="工程技术服务" />工程技术服务
+                            <input type="radio" name="achievetype" value="技术服务" />技术服务-->
+                            <select id="achievetype" name="achievetype" class="easyui-combobox" data-options="editable:false,panelHeight:200">
+                                <option value="基础研究" selected=selected>基础研究</option>
+                                <option value="应用基础研究">应用基础研究</option>
+                                <option value="工程技术服务">工程技术服务</option>
+                                <option value="技术服务">技术服务</option>
+                            </select>
+                            <span class="star">&nbsp;&nbsp;*</span>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="right"><label>上传获奖证书:</label></td>
+                        <td colspan="5">
+                            <div id="uploaddiv">
+
+                                <input id="uploadaward" name="uploadaward" />
+                                <!--<input type="file" id="uploadaward" name="uploadaward" onchange="obj.validate_img(this)" />-->
+                                <!--<input id="uploadaward" name="uploadaward" />-->
+                                <span>&nbsp;&nbsp;*</span>
+                                <a href="#" id="uploadbtn" class="easyui-linkbutton" onclick="obj.upload()">上传</a>
+
+                            </div>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right"><label>获奖证书预览:</label></td>
+                        <td colspan="5">
+                            <div id="divPreview" class="jqzoom">
+                                <img id="prepic" height="100" width="100" alt="" jqimg="" />
+                            </div>
+                            
+                        </td>
+                    </tr>
+                  
+                </table>
+
+            </form>
+          </div>
+    
+
+</body>
+
+</html>

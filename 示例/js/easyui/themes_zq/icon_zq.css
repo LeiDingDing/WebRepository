@@ -1,0 +1,13 @@
+﻿.icon-datebox{
+	background:url('../themes/default/images/datebox_arrow.png') no-repeat center center;
+}
+.icon-chart{
+	background:url('icons/chart_bar.png') no-repeat center center;
+}
+.icon-arrow_refresh{background:url('icons/arrow_refresh.png') no-repeat;}
+.icon-delete3{background:url('icons/delete3.png') no-repeat}
+.icon-set1{background:url('icons/advancedsettings.png') no-repeat;}
+.icon-stop{background:url('icons/stop.png') no-repeat;}
+.icon-xls{background:url('icons/icon_xls.gif') no-repeat;}
+.icon-next{background:url('icons/resultset_next.png') no-repeat;}
+.icon-previous{background:url('icons/resultset_previous.png') no-repeat;}

@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>用户管理</title>
+    <script type="text/javascript" src="/js/easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/js/easyui/locale/easyui-lang-zh_CN.js" ></script>
+    <script type="text/javascript" src="../js/UserManage.js"></script>
+    <link rel="stylesheet" type="text/css" href="/js/easyui/themes/default/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="/js/easyui/themes/icon.css" />
+</head>
+<body>
+    <table id="RegulateSet"></table>
+    <div id="tb" style="padding:5px;height:auto">
+        <div style="margin-bottom:5px">
+            <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" id="add" onclick="obj.add();">添加</a>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" id="edit" onclick="obj.edit();">修改</a>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" id="remove" onclick="obj.remove();">删除</a>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true" style="display:none;" id="save" onclick="obj.save();">保存</a>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-redo" plain="true" style="display:none;" id="redo" onclick="obj.redo();">取消编辑</a>
+        </div>
+    </div>
+</body>
+</html>

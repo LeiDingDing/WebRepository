@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script type="text/javascript" src="../../js/easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../../js/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../js/easyui/themes/default/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="../../js/easyui/themes/icon.css" />
+    <script src="search.js"></script>
+    <style>
+        table {
+            border-right: 1px solid #d9d6c3;
+            border-bottom: 1px solid #d9d6c3;
+            background: #f6f5ec;
+            font-size: 14px;
+        }
+
+            table td {
+                border-left: 1px solid #d9d6c3;
+                border-top: 1px solid #d9d6c3;
+                padding: 5px;
+            }
+        .right{
+                    text-align:right;
+                    padding-right:20px;
+                }
+    </style>
+    
+    
+
+</head>
+<body>
+    <form id="ff">
+        <table border="0" cellspacing="0" cellpadding="1" style="width: 100%;">
+            <tr>
+                <td class="right" style="width: 30%;"><label for="sid">学号:</label></td>
+                <td style="width: 70%;"><input id="sid" name="sid" /></td>
+            </tr>
+            <tr>
+                <td class="right"><label for="name">姓名:</label></td>
+                <td><input id="name" name="name" /></td>
+            </tr>
+            
+            <tr>
+                <td class="right"><label for="role">角色:</label></td>
+                <td><input id="role" name="role" /></td>
+            </tr>
+            <tr>
+                <td class="right"><label for="tel">电话:</label></td>
+                <td><input id="tel" name="tel" /></td>
+            </tr>
+            <tr>
+                <td class="right"><label for="email">邮箱:</label></td>
+                <td><input id="email" name="email" /></td>
+            </tr>
+            <tr>
+                <td class="right"><label for="address">住址:</label></td>
+                <td><input id="address" name="address" /></td>
+            </tr>
+            <tr id="search">
+                <td class="right"><label>操作:</label></td>
+                <td>
+                    <a href="#" onclick="obj.search()" class="easyui-linkbutton" data-options="iconCls: 'icon-search'">查询</a>
+                    
+                </td>
+            </tr>
+        </table>
+        
+        
+        
+    </form>
+</body>
+</html>

@@ -1,0 +1,189 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script type="text/javascript" src="../../js/easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../../js/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../js/easyui/themes/default/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="../../js/easyui/themes/icon.css" />
+    <script src="../js/jquery.colorbox.js"></script>
+    <link rel="stylesheet" type="text/css" href="../js/colorbox.css" />
+    <script>
+    function getUrlParam(url, key) {
+        // 获取参数
+        // var url = window.location.search;
+        // 正则筛选地址栏
+        var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+        // 匹配目标参数
+        var result = url.substr(1).match(reg);
+        //返回参数值
+        return result ? decodeURIComponent(result[2]) : null;
+    }
+
+
+    function del(id) {
+        $.messager.confirm('提示', '是否删除?', function (r) {
+            if (r) {
+                $.post('../ashx/Award.ashx?action=delete', { id: id, table: '获奖' }, function (result) {
+                    if (result == '1') {
+                        $.messager.alert('提示', '删除成功!', 'info', function () {
+                            $("#dg").datagrid("reload");
+                        });
+
+                    }
+                });
+            }
+        });
+
+    }
+    function scan(index) {
+        $("#upstu").attr('href', 'award/updateaward.html?action=scan&index=' + index);
+        $("#upstu").trigger("click");
+
+    }
+    function modify(index) {
+        // $(".modifylink").colorbox({ iframe: true, width: "40%", height: "60%" });
+        //$(".modifylink").attr('href', 'updatestudent.html?action=modify&index=' + index);
+        $("#upstu").attr('href', 'award/updateaward.html?action=modify&index=' + index);
+        $("#upstu").trigger("click");
+
+    }
+    function search() {
+        // $(".modifylink").colorbox({ iframe: true, width: "40%", height: "60%" });
+        //$(".modifylink").attr('href', 'updatestudent.html?action=modify&index=' + index);
+        $("#upstu").attr('href', 'award/searchaward.html');
+        $("#upstu").trigger("click");
+
+    }
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            $("#upstu").colorbox({ iframe: true, width: "40%", height: "80%" });
+            var url = parent.window.location.search;
+            var role = getUrlParam(url, 'roleid');
+            var userid = getUrlParam(url, 'userid');
+            if (role == null) {
+                alert('请登录');
+                parent.window.location.href = 'login.html';
+            }
+            $('#dg').datagrid({
+                // 通过后台获取相应的数据,仅仅支持json格式
+                url: '../ashx/Award.ashx?action=datagrid&table=获奖',
+                idField: "id",  // id字段为标识字段,那么此字段状态将会被dg记录下来
+                // 请求远程数据时发送额外的参数
+                // queryParams: { name: "" },
+                fitColumns: false,  /* 真正的自动展开/收缩列的大小 */
+                striped: true,  /* 显示 奇偶行变色 */
+                nowrap: true,   /* 则在同一行中显示数据 */
+                loadMsg: '加载数据的提示信息',
+                sortName: 'id', /* 支持排序的名称 */
+                sortOrder: 'asc',
+                rownumbers: false, // 是否显示行编号
+                remoteSort: false,  /* 必须禁止使用远程排序 */
+                singleSelect: false,
+                //checkOnSelect:false,
+                /* 分页相关参数配置 */
+                pagination: true,
+                pageNumber: 1,
+                pageSize: 10,
+                pageList: [5, 10, 15, 20],
+                toolbar: [{
+                    iconCls: 'icon-add',
+                    text: '添加',
+                    handler: function () {
+                        // 发送ajax请求判断是否有权限信息
+                        if (role == '1') {
+                            $("#upstu").attr('href', 'award/updateaward.html?action=add');
+                            $("#upstu").trigger("click");
+                        } else {
+                            $.messager.alert('提示', '权限不够,必须管理员才能添加学生信息!', 'info', function () {
+
+                            });
+                        }
+                        
+
+                    }
+                }, '-', {
+                    iconCls: 'icon-search',
+                    text: '查询',
+                    handler: function () {
+                        // 发送ajax请求判断是否有权限信息
+                        // var rows = $('#dg').datagrid('getRows');
+                        //var rowstr = JSON.stringify(rows);
+                        /* $.post('../ashx/Award.ashx?action=export', { datagrid: rowstr }, function (result) {
+                             $.messager.alert('提示', '导出成功!', 'info', function () {
+                                 
+                             });
+                         });*/
+                        search();
+
+                    }
+                }, '-', {
+                    text: "<input type='text' id='ss' />"
+                }],
+                /*冻结列,适合列比较多的情况*/
+                frozenColumns: [[
+                    
+                    /* sortName:'id', sortOrder:'desc', remoteSort:false, sortable:true */
+                    { field: 'id', title: '获奖编号', width: 100, align: 'center', sortable: true },
+                    
+                    {
+                        field: 'scan', title: '查看', width: 40, align: 'center', formatter: function (value, row, index) {
+                            return '<input type="image" onclick="scan(' + index + ')"  src="../Images/icon/query.gif"/>';
+                        }
+                    },
+                    {
+                        field: 'modify', title: '修改', width: 40, align: 'center', formatter: function (value, row, index) {
+                            if (role != '4') {
+                                return '<input type="image" onclick="modify(' + index + ')"  src="../Images/modify.gif"/>';
+
+                            } 
+
+                        }
+                    },
+                    {
+                        field: 'delete', title: '删除', width: 40, align: 'center', formatter: function (value, row, index) {
+                            if (role == '1') {
+                                return '<input type="image" onclick="del(' + row.id + ')" src="../Images/delete.gif" />';
+                            }
+
+
+
+
+                        }
+                    },
+                ]],
+                // 用来设置列的参数
+                columns: [[
+                    /*  field设置字段的名称,与json中的key捆绑 ,title: 列标题   */
+
+                    { field: '获奖名称', title: '获奖名称', width: 200, align: 'center', sortable: true },
+                    { field: '获奖时间', title: '获奖时间', width: 200, align: 'center', sortable: true },
+                    { field: '奖项级别', title: '奖项级别', width: 200, align: 'center', sortable: true },
+                    { field: 'sid', title: '学生学号', width: 150, align: 'center', sortable: true },
+                    
+                ]],
+
+                
+
+            });
+
+            // 设置搜索框
+            $('#ss').searchbox({
+                searcher: function (value, name) {
+                    $('#dg').datagrid('load', { name: value });
+                },
+                prompt: '变形金刚4'
+            });
+
+        });
+    </script>
+</head>
+<body style="margin: 1px;">
+    <table id="dg"></table>
+    <a id="upstu" href="#" style="display:none"></a>
+</body>
+</html>
